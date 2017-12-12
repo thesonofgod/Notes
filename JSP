@@ -1,0 +1,337 @@
+
+
+
+
+		-----------------JSP----------------
+				Java within a Html page.
+	
+	JSP technology is used to create dynamic webapplications.
+	JSP pages are easier to maintain than a Servlet. JSP pages are opposite of Servlets.
+	Everything a Servlet can do, a JSP page can also do it.
+	JSP enables us to write HTML pages containing tags, inside which we can include powerful Java programmes.
+
+	Using JSP, one can easily separate Presentation and Business logic.
+
+	Why JSP is preffered over servlets?
+	-----------------------------------
+
+	1. JSP is Easy to code dynamic web pages.
+	2. JSP does not require additional pages like java class files, 	   web.xml etc.. .
+	3. Any change in the JSP code is handled by webcontainer and doesn't  require recompilation.
+	4.
+
+	Advantages:
+
+			Easy to maintain and code.
+			High Performance and Scalability.
+			JSP is also platform independent.
+
+						LifeCycle of JSP
+						----------------
+
+		A JSP page is converted into servlet in order to service requests.
+		The translation of a JSP page to a servlet is called as LifeCycle of JSP. 
+
+*JSP life cycle is exactly same as the servlet LifeCycle, with one additional step which is translating of JSP into servlet code.
+
+1. Translation of JSP to Servlet code.
+2. Compilation of Servlet to bytecode.
+3. Loading Servlet Class.
+4. Creating Servlet instance.
+5. Initialization by calling jspinit() method.
+6. Request processing by calling _jspService() method.
+7. Destroy by calling jspDestroy() method.
+
+Web Container translates JSP code into a servlet class source(.java file), then compiles that into a java servlet class.
+
+In the third step, the servlet class bytecode is loaded using classloader. The container then creates an instance of that servlet class.
+
+The initialized servlet can now service request. For each request the web container call the _jspService() method.
+
+When the container removes the servlet instance from service, it calls the jspDestroy() method to perform any required clean up.
+What happens to a JSP when it is translated into Servlet?
+
+The code written inside <% %> is JSP code
+
+<html>
+<head>My first jsp</head>
+<%int count= 0;%>
+<body>
+Page Count is:
+<% out.println(++count);%>
+</body>
+</html>
+
+class First{
+	int a =10;
+}
+
+JSP page will be converted at back end like this:
+
+public class hello_jsp extends HttpServlet{
+	
+public void _jspService(Request,Response) throws IOException, ServletException{
+	
+	PrintWriter out = response.getWriter();
+	response.setContentType("text/html");
+	out.write("<html><body>");
+	int count=0;
+	out.write("Page count is:");
+	out.println(++count);
+	out.write("</body></html>");
+	}
+}
+
+
+JSP Scripting Element:
+----------------------
+
+JSP Scripting element are written inside <% %> tags.
+
+Any other Text in the JSP page is considered as HTML code or plain text.
+
+Example:
+--------
+<html>
+<head>
+<% int count =0; %>
+<body>
+Page Count is <%out.println%>
+</body>
+</head>
+</html>
+
+
+There are five different types of scripting elements:
+-----------------------------------------------------
+Comment   	<%-- comment --%>
+Directive 	<%@ directive %>
+Declaration	<%! declarations %>
+Scripteit   <% scriplets %>
+Expression  <%= expression %>
+
+
+JSP Scripting element:
+----------------------
+
+JSP Scripting element are written inside <% %> tags.
+
+Any Other text in the JSP page is considered as HTML code or plain text.
+
+Example on JSP Scripting element:
+---------------------------------
+<html>
+<head>
+<title> My First JSP Page </title>
+</head>
+</html>
+<%
+	int count =0;
+%>
+<body>
+Page count is <%out.println(++count); %>
+</body>
+</html>
+
+
+There are five different types of scripting elements:
+-----------------------------------------------------
+
+Scripting element        					Example
+
+		Comment                       <% -- connect -- %>
+		Directive 					  <%@ directive %>
+		Declaration 				  <%! declarations %>
+		Scriplet 					  <% scriplet %>
+		Expression 					  <%= expression %>
+
+
+JSP Comment:
+------------
+
+JSP comment is used when you are creating a JSP Page and want to put in comments about what you are doing. JSP comments are only seen in JSP page.
+
+Syntax of JSP comment is as follow:
+-----------------------------------
+
+<% -- JSP Comment -- %>
+
+Simple Example of JSP Comment:
+------------------------------
+
+<html>
+<head>
+<title> My First JSP Page </title>
+</head>
+<% int count =0;
+%>
+<body>
+<% -- Code to show page count --%>
+Page count is <% out.println(++count); %>
+</body>
+</html>
+
+
+Scriplet Tag:
+-------------
+
+Scriplet Tag allows you to write Java code inside JSP page
+
+Syntax of Scriplet Tag as follows:
+<% java code %>
+
+Example of Scriplet:
+--------------------
+
+<html>
+<head>
+<title>
+My First JSP Page </title>
+</head>
+<%
+int count =0; %>
+<body>
+Page Count is <%out.println(++count); %>
+</body>
+</html>
+
+Declaration Tag:
+----------------
+We can declare a variable or method in JSP inside declaration Tag
+
+Syntax of Declaration Tag:
+--------------------------
+<%! Declaration %>
+
+Example of Scriplet:
+--------------------
+
+<html>
+<head>
+<title>
+
+
+
+Directive Tag:
+--------------
+Directive Tag gives special instruction to Web Container at the time of page translation.
+Direction Tags are of three types: page include and taglib
+
+<%@ page -- %> defines page dependent properties sucha as language, session, errorPage etc... 
+
+<%@ include -- %> defines files to be included 
+
+<%@ taglib ... %> declares tag library used in the page.
+
+We will discuss about include and taglib directives later.
+
+The PageDirective defines a number of page depndent properties which communicates with the WebContainer at the time of translation. Basic syntax of using page directive tag is :
+
+<%@ page attribute = "value"%> where attributes can be:
+import attribute, language attribute, extends attribute, session attribute, contentType attribute...
+
+Import attribute: The import attribute defines the set of classes and packages that must be imported in servlet class definition. For Example:
+
+<%@ page import = "java.util.Date"%> or
+<%@ page import = "java.util.Date,java.net.*"%>
+
+language attribute: language attribute defines scripting language to be used in the page.
+
+extends attribute: extends attribute defines the class name of the superclass of the servlet class that is generated from the jsp page.
+
+Session attribute: Session attribute defines whether the JSPpage is participating in an HTTP session. The value is either true or false.
+
+contentType: contentType attribute defines the MIME type for the JSP response.
+
+
+Today date is example:
+----------------------
+
+*
+
+
+Expression Tag:
+---------------
+
+
+
+<%= JavaExpression %>
+
+<%= (2*5) %>
+
+it turns into this 
+
+out.println((2*5));
+
+JSP Implicit objects:
+---------------------
+JSP provides access to some implicit object when represent some commonly used objects for servlets that JSP page developers might need to use.
+
+For example you can retrieve HTML form parameter data by using request variable which represent the HttpServletRequest object.
+
+<% 
+	String user = request.getParameter("user");
+
+%>
+
+	Hello, <% out.println(user); %>
+
+
+		Implicit Objects in JSP:
+		------------------------
+
+		request --> The HttpServletRequest object is associated with the request.
+
+		response --> The HttpServletResponse object is associated with the response that is sent back to browser.
+
+		out 
+
+
+JSP Directive Element:
+----------------------
+
+1. Include Directive 2. Tablib Directive
+
+Include Directive:
+------------------
+
+The include directive tells the webcpntainer to copy everything in the included file and paste it into current jsp file.
+
+Syntax of include directive is:
+
+
+<html>
+<body>
+
+<%@ include file = "header.jsp" %> [This says insert the complete content of header in the JSP file]
+<br>
+Contact us at :prashant994t@gmail.com
+<br/>
+
+
+
+
+
+
+ExceptionHandling in JSP:
+-------------------------
+
+The exception is normally an Object that is thrown at runtime.
+Exception handling is the process to handle runtime errors. There may occur exception any time in your webapplication.
+So handling exceptions is safer side for the web application.
+
+`
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

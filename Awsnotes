@@ -1,0 +1,83 @@
+
+Kinesis
+Kinesis Fire
+Kinesis Stream
+Kinesis
+
+Consume big data
+Process large amounts of data
+Big data processing Elastic Map Reduce
+
+Ec2 - EBS backed vs instance Store:
+* EBS backed Volumes are consistent.
+* Instance Store volumes are not consistent.
+* EBS Volumes can be detached and attached to other instances.
+* EBS volumes can be stopped and data will persust
+Untance store volimes cannot be stopped if you do this the data will be wiped.
+
+EBS Backed = store Data Long Term.
+
+
+OPS works:
+Orchestration Service that uses Chef.
+
+Media Transcoder -------------- Elastic Transcoder
+Provides different popular output formats.
+Pays by the minutes that you transcode.
+
+SWF Actors:
+Workflow Starters     Deciders    Activity Workers
+
+Metadata Get EC2 Public address:
+ jmj
+curl http://169.254.169.254/latest/meta-data/
+
+AWS Organisations and Consolidated Billing:
+
+        				  Root
+
+
+	organisational unit			Organisational Unit
+
+AWS 										AWS
+ACC 										ACC													
+		OU 								OU
+
+	AWS			AWS				AWS				AWS
+	Acc			Acc				Acc             ACC
+
+
+	
+			Cloud Front
+
+
+---------CDN------------ 
+Content Delivery Network
+
+Edge Location is the location where the content will be cached.
+
+Origin is the origin of all the file that the cdn is going to distribute.
+S3 EC2 ELB R53
+
+Distribution - CDN consists of collection of edge locations.
+
+Time to live TTL
+
+Cloud front is used to deliver content.                                
+
+888
+
+
+Storage Gateway:
+----------------
+Four types of STorage Gateway:
+
+- File Gateway(NFS)
+- Volume Gateway(iSCSI)
+	* Stored volume
+	* Cached volume
+- Tape Gateway(VTL)
+
+Storage gateway is a vm running and using the vpc dc and internet to store data in s3 s3-ia glacier.
+
+

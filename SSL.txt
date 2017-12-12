@@ -1,0 +1,95 @@
+SSL
+
+ikeyman
+
+
+
+
+i want to send the data in a secure way
+
+i want to encrypt it even if any one wants to reads it from the tcp ip packets
+
+
+
+
+browser ---> encrypt --> decrypt ---> Server
+
+
+
+When i encrypt the payload size will go up because we are encrypting the data when you decrypt it the cpu cycles will be more..
+
+so only if you need to encrypt hen encrypt
+
+
+There are two type of encryption algorithms we have.
+---------------------------------------------------
+
+**Symmetric													**ASymmetric
+
+old days														Public key to encrpt the message
+kings 															Private key to decrypt the message
+one guy sends info                								
+and decoding is done
+
+Same key to encrypt and decrypt
+																
+																Key databse files(Kdb) for IHS----> to store the certificates
+																
+																We put certificates in the key database file 
+																
+																
+																LDAP: 
+																Tivoli directory service --heirarchial data base
+																Sun LDAP
+																ACtive Directory
+																
+																
+																Application server
+
+.kdb to store certificates																		
+.p12 is for websphere key database file
+
+The websphere the way it performs is one is it has the 	
+															trust store.. 										Key store
+															
+											P12 files		Public Key											Private key						P12 Files
+														
+																If i dont have the public key it cannot do anything.
+																
+																
+																This is called one way SSl
+																
+There is a two way SSL
+   ----------------------------------------------------------------
+   |	TrustStore 			----->						KeyStore  |
+   |			Sends public key, will decrypt it at here												  |
+   |															  |
+   | 															  |
+   |															  |
+   | 	 KeyStore										TrustStore|
+   |----------------------------------------------------------------
+																
+
+Self signed certificate   	
+Once you recieve the certificate you'll sign the certificate
+
+in the local you'll sign the certificate
+
+
+Third part certificate
+verisign and other companies that are third party which sign the certificates
+signer certificate
+
+If you want to generate the certificates you'll use the Ikeyman tool... there is one more tool ...it is kdb ssh or something which is used for generating the certificates.
+
+
+X11 forwarding
+ 
+ personal certificate request
+ 
+ the third party will sign it 
+ 
+ 
+ 
+ 
+ 

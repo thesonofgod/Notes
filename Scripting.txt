@@ -1,0 +1,90 @@
+SCRIPTING
+
+
+
+
+WAS Administration using the scripting
+
+
+
+
+																Work on different resources
+																ooooo													at  the end of the day youve a master repositor
+	                   Connector---->	mbean service			ooooo mbeans 
+		wsadmin								
+			|\													Transient mbean --------->on the fly
+			| \													Non Transient mbean -------> config
+			|  \												
+		jacl	jython												
+																
+		Bean Scripting framework								1. control 		operations
+																2. configure 	operations
+																3. deployment 	operations
+																
+	it is going to convert, take this bean and convert and apply to the mbean server															
+																
+																
+													Websphere Objects			Implemented as part of jython and jacl --- In both the objects are there.
+													-----------------
+													1. Admin config 	---> confog
+													2. Admin control
+													3. Admin app	 	---> deploy
+													4. Admin task	 	---> easy way to perform the Admin(Config + Control)
+													5. Help
+													
+													
+													Ex:
+													Admin config.create datasource 
+													AdminConfig.createServer
+													AdminApp.Install -----
+													
+												There are methods on the objects you'll call to perform the operations.
+												
+									Adminconfig.save() ---> saving into master repository (before that itll be in the tmp)
+									
+									AdminConfig.sync() --->	syncs the data
+									
+									To connect:
+									./wsadmin -lang <Jython/Jacl > -userName xxxx -password xxxx [By default it is jacl, there is a config called wsadmin.conf]	
+									
+									dmgr ---> properties ---> wsadmin.properties file 
+									
+								  -> its gonna save the host information(scripting.host/default_language jacl/epoch parameters/trace file path/tracestring/)
+													
+													by using this it is going to connect to the mbean
+													
+													BY def wsadmin connects to mbean through SOAP protocol
+													
+													By using none mode i can directly conncet to the master repository but i can only perform AdminConfig operations
+													
+													
+													When the jvm is down, if you want to update some configuration then you'll use that
+													
+													Ex: Security.xml ---> Enable true /false
+														In that cases you can connect directly to the repository.
+														
+														Conn type ---> None 
+														
+														-parameter -lang jython
+														
+														AdminControl.getNode() ---> you'll get the node you're currently in
+														
+														They wrote the jython commands to talk to the mbeans 
+														
+														
+								SoapClient.properties
+								
+								
+								
+								what is Scripting Library?
+								
+								AppServer Scripting Libraries..
+								
+								
+								usingh jenkins we performed scripts of deployment mserver with passwordless ssh
+								
+								
+								
+								
+							
+												

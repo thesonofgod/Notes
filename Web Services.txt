@@ -1,0 +1,15 @@
+ Web Services
+ 
+ 
+https://github.com/dmi3coder/books/blob/master/%5BJAVA%5D%5BJava%20Web%20Services%20-%20Up%20and%20Running%2C%202nd%20Edition%5D.pdf
+
+ https://github.com/miguellgt/books/blob/master/rest/RESTful%20Java%20with%20JAX-RS%202.0%2C%202nd%20Edition.pdf
+ 
+ 
+ 
+ http://docs.oracle.com/javaee/6/tutorial/doc/giepu.html
+ 
+ http://docs.oracle.com/javaee/6/tutorial/doc/bnayl.html
+ 
+ 
+ 

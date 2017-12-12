@@ -1,0 +1,254 @@
+Montoring
+---------
+
+health check ----> Ping | response time | logs | 
+
+how many jvms are running 
+request response time
+yesterday today volume increase decrease
+number of connections to the database
+how many messages in the queue
+how many messages processed in the queue
+
+
+When there is a issue we should not spend time in identifying the issue. So most of the time is used for resolving the issue.
+
+proactively identifying the issue
+Reactively identifying the issue
+
+Progression of the issue should be identified. How Fast im going to identify the issue. 
+
+Im going to look into it . there is a problem with your monitoring......
+
+Issue types : 
+
+Sev1 --> Almost every customer is effected    						----> Immediately done, Immediately join the call
+Sev2 --> Less than 20% customers is effected 						----> also critical but not as important as sev 1
+Sev4 --> less number of customers are effected(Less important)		----> Less important than the other two.
+
+
+How do they categorize.. 
+
+1. How many calls call centers are getting
+2. Robotic Response time monitoring.
+
+
+orengeburg
+twinsburg
+sacremento
+
+1. Counters
+
+	how many connection i made ---> ex: JDBC connections; Number of requests; JMS Connections; Number of messages processed; Number of messages pending
+
+2. Metrics 
+	
+	Response time metrics (what is my round trip time) we are going to measure in terms of time.
+	
+	
+Verizon Project
+---------------
+
+
+Load Balancer:
+
+What you'll check
+									  Lower Threshold 																		Higher Threshold
+i. Number of connections:			no connections to the website(0/5/10) 									 max amount of connections it can take(500)
+	
+ii.Response time					based on the service(time req to serve the req)							Based on service
+
+iii. Number of how many req i recieved.... ADP has many type o fpayrolls
+
+SLA --- Service Level Agreement ---> average response time Im going to have on my application. wrt to what. I cannot serve 1000 req / sec , Im going to server 50 ms or 500 ms response time considering the fact that im going to get this much TPS(Transaction Per Second).
+ 2000 tpm x 60 sec = 12000
+ even the graph from tpm shows the same thing.
+
+[I'm trying to create a app, ex : the ten forms of data need to go into database, If i just ask for give my bank details, give my transaction details. I'm using te same url to server both type of transactions. one trasavtion is qualified for few millisecond and the other app other time.]
+
+
+IHS:
+
+Response time is slow? 
+
+Montinoring tool ---> then the logs 
+
+1. Number of HTTP connections
+
+Not the consolidated way ... we don't know which machine is causing the issue
+
+If this server goes wrong how can i monitor ?????
+
+I need to know about a particular machine.
+I need to know if a script is using a lot of CPU.
+ 
+2. Wait time
+
+3. Thread count
+
+4. Response code (404 and 500 errors---> read the documentation from mansas)
+
+5. Response time
+
+
+WAS:
+
+1. Heap 
+			% of heap usage ( if using more than 80% then we are generating a alert.)
+		Max heap 
+		Min heap 
+		
+2. GC 
+
+Box level
+	|	3. CPU
+	|
+	|	4. Physical Memory
+	|
+	|	5. Disk	Space 
+
+6. Connection Pool
+7. Thread Pool
+8. Connection Factory
+9. If MDB is not taking any messages it should give a alrt. 
+10. WebContainer Thread Pool/ EJB Container
+ It is not goin to perform thread switching
+Default thread pool ---> will be used will i try to consume the message from the queue by using MDB.
+EJB Thread Pool --- > destination 
+
+to connect to db you need to write a query you need to understand how much time a query is taking. 
+
+
+MQ ---> 1 . Queue Depth (if the number of messages are more than 100000 / number of message is 0)
+		2. MQ is Up and running
+		
+If the respone time is taking more at LB ---> you should be able to navigate and see where the response time is taking time. 
+
+
+
+Performance :   
++++++++++++++
+
+									 DB
+									/					 
+								  /						
+								/	75 ms					
+ 		app on the	---->	JVM 
+					100ms
+		
+		I need only 1 JDBC connection the serve the request
+		
+		1  req						 -			 100 ms - 1 JDBC call
+		10 concurrent req            -			 100 ms - 10 JDBC Conn --> 750 ms (7.5s)
+												
+My response time jumped to 1000 ms ---> 10 JDBC -- 750 ms (7.5s) 
+							(10s)
+							
+							2000ms ----> 10 JDBC -- 1750ms (17.5s)
+							(20s)
+							
+							
+						1.	If response time is high there will be more conn
+						2.	Live reeq within my jvm is more(Heap usage is more)
+						3.  when the heap goes high i need to spend a lot more time to collect garbage
+						4.  My cpu cycles will also go high
+						
+				Once it reaches a certain point of time, at the time of designing you should never think that someone is going to do a good job for me.
+				
+				180 secs in front of the pool before connecting to the JDBC. 
+				
+				
+				
+				
+				
+				
+				Wiley!! 
+				
+				Http server power pack
+				
+	
+			
+			
+			
+			CA 	Manager Workstation is used to connect to the CA Manager.
+			
+		
+		
+		Server-----> PMI Performance Manger Infrastructure. By def: basic and enabled.
+		
+		
+		In the java process def
+		
+		You give the SPec in the generic JVM arguments... 
+		you give the  agent jar file and the agent profile like the wiley introscope profile 
+		
+		
+Server Infrastructure: ---> 			Custom process definition 	enable the custom server
+
+
+Introscopewiley.profile 
+
+
+you have auto probe enabled which means where do you want to write the agent log
+you're specifying the probe list
+which means what you want to monitor
+
+in this case webservices.pbl | .pbd
+
+.pbl contains list of things to do 
+.pbl contains .pbd
+
+those are the files that are used to collect the data
+
+
+inside the pbl you'll see the pbd's
+what i need to monitor in my pbl --- > in each and every area you'll have a pbd j2ee.pbd etc
+
+we use the introscope property file --> where to connect the enterprise manager --> how to configure the agents --> the pbd in the pbl's
+--------------------
+For powerpack webserver
+
+WE configure the webserver.config.xml file
+
+	 				we configure the where is my webservers what is the port and where is the http server is running on
+					
+					
+					
+					
+					outside the process!!
+					it is not part of the http server
+					it is running outside the server
+					
+					within the workstation there are two views
+			
+			---> CA Introscope Workstation		
+					1. Investigator view
+										When you click on the investigator|||| you'll seee metric browser(all servers) |||| domains |||| my proj is a jitter
+					
+					2. Console view 
+						 
+						 
+							
+							You can also see the dashboards
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 		
+
+
+
+	
+
+
+

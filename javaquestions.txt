@@ -1,0 +1,60 @@
+java
+
+
+
+hashmap and4
+weak normal hashmapp
+
+if the key object does not have any ref then both key and value go to garbage collection 
+
+--> java thread local class to support thread local variable
+							it is one way of achieving thread safety
+							
+							
+							Write the code for thread safe singleton class in java
+							
+						 	lazy instantiation
+						
+						
+-->	What is the difference between 
+							
+							sleep and wait
+						
+--> can we create a immatable object which contains a mutable object
+							yes we can do it but there is a possibility of losing the mutability
+							
+--> what is the data type you use for price?
+		Double 
+		
+--> byte to string 
+		string can take a byte array and convert into a string
+		
+--> B extends A, C extends B
+
+can we cast B into C
+
+--> which class contans the clone method
+ 		cloneable interface
+		
+--> is ++ operator is thread safe in java
+			
+			it is not thread safe, ATOMIC Increment 
+			
+--> when an object is created there is head in heap.
+	
+--> contructor chanining 
+this
+
+--> Size of int in 64 bit JVM ---> 4 bytes
+--> Difference between serial and parallel GC
+		Serial Parallel and concurrent
+		
+--> JVM is 32 bit or 64 bit
+			4 Gib     2 Tib
+--> JRE + JDK JVM
+
+--> local variables frames will be executed in the stack
+Objects alloacted memory in the heap
+
+--> 
+

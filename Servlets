@@ -1,0 +1,428 @@
+
+Introduction to Servlet
+-----------------------
+1. Servlet Technology is used to create webapplication.
+2. Servlet Technology uses Java language to create a webapplication.
+
+
+
+
+Web 					Web 																								servlet
+
+Browser					Server						--------
+													--------
+													--------
+													Dynamic Page	
+
+
+	Web Browser requests web server then web server contacts servlet and servlet contact dynamic page then the dynamic page contacts webserver and the websever redirects the data to the webbrowser as requested.
+
+
+CGI (Common Gateway Interface):
+-------------------------------
+	Before introduction of Java servlet API, CGI technology was used to create dynamic web application.
+	CGI technology used to have many drawbacks such as creating a separate process for each request, and it was a PLATFORM dependent.(C, C++)
+
+		High memory usage and low performace.
+
+We are unable to implement multi tasking.
+Multi tasking example,
+Eclipse usage along with songs, with some downloads on browser.
+Thread based technologies are used to have multi tasming in web application using java .
+
+
+******Class file : NO code is visible | encrypted into byte code only 					   						understandable by JVM
+-------------------------------------------------------
+
+JVM is platform dependent and it can understand the byte code.
+
+Java is independent and can be developed on any platform.
+
+I have developed a web application in windows operating system -- Local 1,2,3,4,5
+
+war file -- First.war -- Check in and Check out( SVN related stuff) -- 
+
+SVN Importance: Developed code- for unknown reasons the laptop gone-  code gone- tmrw need to deploy the code-- so svn is a repository.
+
+
+This war file is updated to the networking department.
+they will deploy this war file on linux servers.
+
+Jdbc servlet expired
+
+*	spirng with web services
+-------------------------------------------------------
+
+CGI vs Servlet:
+---------------
+
+Java servlet technology was introduced to overcome the limitations of CGI technology
+
+1. Servlets provide better performace than CGI in terms of processing time, memory utilization because servlets benefits of multithreading and for each request a new Thread is going to be created, that is faster when compared to the CGI Object.
+
+2. Servlets platform are independent, the web application developed with Servlet can be run on any standard web container such as apache tomcat, GlassFist(Java), JBoss and on any operating system such as Windows, Linux, Unix, ....
+
+3. Servlets are robust because container takes care lifecycle of a servlet and we don't need to worry about memory leaks, security, Garbage collection.
+
+Core java itself is a robust language.
+When do you say a technology is Robust--- 
+Exception handling features, multi tasking(threading)
+
+Web container is a part of a server.
+Servlet LifeCycle
+
+Memory leaks		-  		performance issue.
+Garbage collector   -		Unused objects will tka esome internal memory which is going to effect the performacne. It is going to deallocate the unused Object and Variables.
+
+Int a= 10; Is going to take 4 byte but we are not using this anywhere in the program. This is garbage unsued waste so removed by JVM which is called as Garbage collection.
+
+
+Java is not supporting pointers. Hacking related problems, so its more secure language when compared to other programming languages. 
+
+Building code---  Core java
+
+70% by core java 30 % by framework.
+
+Servlet API: 
+------------
+
+Servlet API consists of two important packages i.e:
+1.javax.Servlet
+2.javax.Servlet.http
+
+Some inportant classes and interfaces of javax.servlet:
+interfaces  - Servlet.ServletContext, ServletConfig.....
+Classes 	- ServletInputStream, ServletOutputStream, ServletRequestEvent....
+
+Some important classes andinterface of javax.Servlet.http
+
+interfaces -- HTTPServlet, HttpServletResponse...
+Classes    -- HTTPServletRequest...
+
+Servlet Interface:
+------------------
+
+Servlet Interface provides five methods. Out of these five methods, three methods belong to Servlet life cycle.
+And the rest of methods which are non-life cycle.
+
+service(Servletrequest,Servletresponse)     |
+init(ServletConfig)							|	Life Cycle methods of 
+destroy()									|			Servlet
+
+getServletConfig()							|
+getServletInfo()							|	Non life cycle methods
+
+GenericServletClass:
+--------------------
+GenericServlet is an abstract class that provides the implementation of most of the basic servlet methods.
+init()`
+service()
+destroy()
+getInitParameter()
+getInitParameterNames()
+
+HttpServletClass:
+-----------------
+HttpServlet is also an abstract class. This class gives the implementation of various service() methods of Servlet interface.
+
+To create a Servlet, we should create a class that extends HttpServlet abstract class.
+
+Ex: class First extends HttpServlet{}
+
+Servlet Applications:
+---------------------
+How Servlet is used. How it is applied:
+
+WebContainer is responsible for managing execution of servlets and jsp pages for Java EE application.
+
+When a request comes in for a Servlet, the server hands the request to the webcontainer. Webcontainer is responsible for instantiating the server or creating a new Thread for that request.
+
+
+Web Container is a part of Web Server
+
+Its the job of WebContainer to get the request and response to the servlet.
+The container creates multiple threads to process mutliple requests to a single servlet.
+
+Servlet don't have a main() method. Web Container manages life cycle of a servlet instance.
+
+1. User sends a request for a servlet by clicking on some URL.
+2. The container finds the servlet using deployment descriptor and create two Objects:
+
+	1. HttpServletRequest
+	2. HttpServletResponse
+3. Then container creates or allocates a thread for that request and calls the servlet's service() method and passes the request and response objects as arguments.
+4. The service() method, then decides which serlvet method is going to call.doGet or doPost().
+HttpRequestMethod(Get, Post....) sent by client.
+Suppose client sent an Http GET request, so service()
+5. Then the Servlet uses response Object to write the response back to the client.
+6. After the service() method is completed the thread dies. And the request and response Objects are ready for GC.
+
+Servlet life cycle:
+-------------------
+1.Loading a Servket class:
+--------------------------
+A. Servlet class is loaded when first request for the servlet is received by the Web container.
+
+2. Servlet Instance creation:
+-----------------------------
+After the Servlet class is loaded, Web container creates the instance of it. Servlet instance is created inly once in a lifeCycle of a Servlet.
+
+3. Call to init() method:
+-------------------------
+intit() method is called by the web container on servlet instance to initialize the Servlet.
+
+4. Call to the Service() method:
+--------------------------------
+The containers call the service() method each time the request for servlet is received.
+The service() will call either doGet() or doPost() based upon http type.
+
+5. Call to destroy() method:
+----------------------------
+The WebContainer call the destroy() method.
+
+Introduction to Servlet Request:
+--------------------------------
+True job of a Servlet is to handle client request.
+Servlet API provides two important interfaces, they are
+1.javax.servlet.ServletRequest
+2.javax.servlet.HttpServletRequest tp emcapsulate client request.
+
+Servlet Request interface is used to provide client request information to the servlet.
+Servlet container creates ServletRequest Object from client request and pass it to the servlet service() method for processing. 
+
+----------------------------------------------------
+
+Introduction to Servlet Response:
+---------------------------------
+
+Servlet API provides two important interfaces ServletResponse and HttpServletResponse to assist in sending response to client.
+ServletResponse interface is used by servlet in sending response to the client.Servlet Container creates the ServletResponse Object and pass it to the servlet service().
+
+
+Introduction to RequestDispatcher:
+----------------------------------
+RequestDispatcher is an interface, implementation of which defines an Object which can dispatch request to any resources(such as HTML, Images, Jsp, Servlet) on the server.
+
+RequestDispatcher interface is used to forward the request to another resource that can be HTML,JSP,Servlet in the same context. We can also use this to include the content of another resource to the response.
+
+This interface is used for servlet communication with in the smae context.
+
+How to get an Object of RequestDispatcher?
+getRequestDispatcher() method of ServletRequest returns the Object of RequestDispatcher
+
+RequestDispatcher rs = request.getRequestDispatcher("hello.html");
+rs.forward(request,response);
+
+RequestDispatcher rs = request.getRequestDispatcher("hello.html");
+	|			
+	|
+	^
+ServletRequest Object
+
+
+rs.forward(request,response);
+Forward the request and response objects to hello.html
+
+
+SendRedirect in Servlet:
+------------------------
+The sendRedirect() method of HttpServletResponse interface can be used to redirect reponse to another resource, it maybe servlet,jsp
+
+It works at client side because it uses the URL bar of the browser to make another request, so it can work both inside and outside the server.
+
+*	Differencers between forward() and 					sendRedirect() methods:
+
+1. The forward() method works at server side.
+1.The SendRedirect() method works at client side.
+
+2. forward() sends the same request and respinse objects to another servlet.
+2.SendRedirect() always sends a new Request.
+
+3.forward() can work within the server only.
+3.sendRedirect() can be used within and outside of the server.
+
+4. forward() Example: 
+			request.getRequestDispatcher("servlet2")
+			forward(request,response);
+
+4.sendRedirect() example:
+			response.sendRedirect("servlet2")
+
+
+Syntax of sendRedirect() method: 
+--------------------------------
+
+public void sendRedirect(String url) throws IOException;
+
+Ex:
+---
+reponse.sendRedirect("www.google.com")
+
+
+package com.company.siva;
+
+import java.io.IOexception;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+
+ServletConfig Interface:
+-----------------------
+
+An object of ServletConfig is created by the webcontainer for each Servlet.
+This object can be used to get configuration information formweb.xml file.
+
+If the configuration information is modified from the web.xml file, we do not need to change the servlet. So it manage the web application if any specific content is modified from time to time.
+
+Advantage of ServletConfig:
+---------------------------
+The core advantage of ServletConfig is that you do not need to edit the servlet file if information is modified web.xml
+
+Syntax of getServletConfig() method:
+------------------------------------
+
+public ServletConfig getServletConfig();
+
+
+How parameter is initialized inside the web.xml:
+------------------------------------------------
+
+<servlet>
+<servlet-name></servlet-name>
+<servlet-class>MyServlet</servlet-class>
+<init-param>
+<param-name>email</param-name>
+<param-value>tiramareddiprashanth@gmail.com</param-value>
+</init-param>
+
+</servlet>
+
+Inside the Servlet class, using the following code:
+---------------------------------------------------
+ServletConfig sc = getServletConfig();
+out.println(sc.getInitParameter("email"));
+
+
+
+Server context:
+--------------
+
+
+Introduction to Attribute:
+--------------------------
+An attribute is an Object that is used to share information in a web application.
+Attribute allows Servlets to share information among themselves. Attributes can be Set and Get from one of the following scopes:
+1. Request 2. Session 3. Application
+
+Application Scope:
+-----------------
+ServletContext sc = getServletContext();
+sc.setAttribute("user", "siva");
+sc.getAttribute("user");
+sc.removerAttribute("user");
+
+Session Management:
+-------------------
+We all know that Http is a stateless protocol. All requests and responses are independent. But sometimes you need to keep track on client's activity across multiple requests. 
+
+SessionManagement is a mechanism used by the WebContainer to store the session information for a particular user.
+There are four different sessionManagement concepts:
+1. HttpSession
+2. URL-Rewriting Session.
+3. HiddenFrom Session.
+4. Cookies Session.
+
+Session is used to store everything that we can get from the client from all the requests the client makes.
+
+Client 1						Server	
+			Request
+			id=123 	
+							Web Container
+							^^^^^^^^^^^^^
+							Session Session
+			Request
+			id=134
+Client 2 	
+
+
+HttpSession is an Object is used to store entire session with a specific client. We can store, retrieve and remove an attribute from HTTPSession Object. Any Servlet can have access to HttpSession Object throughout the getSession() method of the HttpServletRequest Object
+
+How Http session works:
+----------------------
+
+1.On client's request, the web container generates a unique sessionID and gives it back to the clinet with response. This is a temporary session created by webcontainer.
+
+2.The client sends back the sessionID with each request. Making it easier for the webcontainer to identify where the request is coming from.
+
+3. The Webcontainer uses this ID, finds the matching session with the ID and associates the session with the request.
+
+HTTP SESSION:
+-------------
+
+Cookies for Session Management:
+-------------------------------
+Cookies are small pieces of information that are sent in response from the webserver to the client.
+Cookies are the simplest technique used for storing client state.
+
+Cookies are stored on client's computer.
+
+Cookies API:
+------------
+Cookies are created using Cookie class present in Servlet API.
+Cookies are added to response Object using the addCookie() method.This method sends cookies information over the HTTP response.
+
+getCookies() method is used to access the cookies that are added to response Object.
+
+Creating a new Cookies:
+-----------------------
+Cookie ck = new Cookie("username", name);
+
+Setting up lifespan for a Cookie:
+
+-------------ck.setMaxAge(20*60);
+
+Sending the cookies to the client:
+
+-------------Getting cookies from client request:
+
+Cookie[] cks = request.getCookies();
+
+URL Rewriting Session Management:
+---------------------------------
+If the client has disabled the cookies in the browser them session management using cookie won't work. In that case we need to go with URL Rewriting session Management can be used as a backup.
+URL Rewriting will always work.
+
+In URL Rewriting a token parameter is added at the end of URL. The token consist of name/value pair separated by an equal(=) sign.
+
+							parameter 
+							value
+							   |	
+					hello?id=123&user=siva
+					       |       |
+						parameter parameter2
+						name	
+
+The getParamter() method is used to get the parameter value at the server side.
+
+
+Hidden Form Field Session Management:
+-------------------------------------
+
+Hidden Form Field can also be used to store session information for a particular client.
+In case of Hidden Form Field a hidden field is used to store client state. In this case user information is stored in hidden field value and retrieved from another servlet.
+
+
+
+
+
+
+
+
+
+
+
+
+

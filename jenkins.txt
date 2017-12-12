@@ -1,0 +1,210 @@
+										
+																		JENKINs
+
+ We need to do five things at the end of this exercise
+
+** 1. we should be able to execute the remote ssh 
+
+** 2. we should be able to pass a parameter from one job to other job
+
+** 3. How to install jenkins and run it up
+
+** 4. What is a slave node and how to use a slave node. (remote box lo slave node)
+
+** 5. How can I connect to the git and run a maven build
+
+** 6. perform the deployment using the python script
+
+
+
+Step 1 : Install Java ---> sudo yum install java | sudo yum install wget Check the java versions and compatibility
+	
+Step 2 : wget Tomcat ---> start the tomcat 
+
+https://platform.igrafx.com/doc/installation-guide/install-application-server-environments-for-development-and-testing/installation-tomcat-8-on-centos-7-or-rhel-red-hat-
+enterprise-linux-7
+
+Learn how to give permissions to the whole folders 
+
+
+Step 3 : wget Jenkins ---> 
+
+								* copy the jenkins in the webapps of the tomcat folder. 
+								* go to the browser servername:8080 and then /jenkins to access the jenkins the front page
+								
+wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+
+Step 4 : Install the war file on the jenkins
+
+Step 5 : Connect to the ip:8080/jenkins to use the UI of the jenkins
+
+Step 6 : Install and configure plugins
+
+
+
+Password less Ssh:
+
+Step 1 : download the plugin file for ssh
+Step 2 : manage system config
+Step 3 : set the key to private key of the jenkins machine
+Step 4 : give the user name of the required machine you want to connect and also the ip address of the machine
+Step 5 : save and apply
+
+How to do sftp:
+
+machine 1 			Machine 2 
+X						Y
+
+Step 1 : ssh-keygen in the x
+Step 2 : copy the id_rsa pub of x to the authorized keys of y in the .ssh folder
+Step 3 : set the permission of ssh to 700 and authorized key to 600
+Step 4 : sftp username@ipaddress to sftp to the machine y from x
+
+Adding a slave to the master:
+http://scmquest.com/jenkins-master-slave-setup-and-configuration-with-screenshots/
+
+Step 1 : Systems config lo you need to change the private key to that of the slave to talk to wasadmin
+Step 2 : SFTP to the master repo and WASADMIN with the newly created slave
+Step 3 : We need to create a node (manage nodes) and give the private ip of jenkins and user of the 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Few Basics Concepts:
+
+* the term build may refer to the process by which source code is converted into a stand alone form that can be rum on a computer or to the for, itself.
+
+* one of the most important steps of a software build is the complitation process, where source code files are converted into executable code.
+
+* builds are created when a certain point in development has been reached or the code has been deemed ready for implementation, either for testing or outright release 
+
+* a build is also known as code build or software build
+
+
+BUILD mean compilation of the code. . 
+
+After compilation you're going to creata  jar file dll war file er fille etc 
+
+c++ class files
+
+
+Build Artifacts:
+
+* IN sdlc artifact usually refers to things that are produced by people involved in the process.
+
+* the artifacts created during the build hob are called build artifacts 
+
+* The build artifacts include reports, websites or files
+
+* thers artifacts can be shared between multiple builds also
+
+The end part of the build is called artifacts.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Application.xml i will give the context root
+
+Dev  ======BuilD   =======Deployment Servers 
+ST/QA
+Performance
+Field Testing
+
+Production
+
+Build once deploy anywhere
+
+Code repo(CONTAINS THE CODE FILES)				| 			 Artifact repo(CONTAINS WAR FILES)ARTIFACTORY |NEXUS
+
+
+
+Requirements ---> BA
+Design decision documents , HDL, UML  ----> architect
+LDL  ----> Lead Developer
+
+
+
+CODE REPO ----> MAVEN ---> JENKINS ---> ARTIFACT REPO ----> JENKINS ---> APPLICATION SERVER
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BUILD AUTOMATION:
+
+Push mechanism and pull mechanism 
+
+runs every 30 min 
+
+77
+----------------
+
+
+Different CI tools
+
+* Code repo
+	SVN, Mercurial, GIT
+	
+* Continous Build Systems
+	Jenkins, Bamboo, Cruise Control
+
+* Test Frameworks
+	Cucumber
+	
+* artifact repo
+	Nexus
+	
+	
+	JENKINS
+	-------
+	
+	Continous build tool written in java
+	
+	java -jar jenkins.war to run jenkins as a server of its own
+	it does not need tomcat or any other but it can also run on it and other servlet containers
+	
+Terms:
+
+Server:
+	Whenever you install you get a gui and using which you're going install the plugins, builds, configure the entire system. 
+	
+Master: 
+	The word is relative. it has some slaves. This refers to the jenkins server host only. 
+	
+	Master is like dmgr and the slaves are like nodes
+	
+	
+	Slave - client - agent
+	
+Executor: 
+	As many number of exxecutors you've for your master. Those many processes can run.
+	If agent has 4 executors then 4 jobs can be run at the same time.
+	
+	
+	
+	
+
+
+ITEM :
+
+
+You need to create a item and it has different options and then create a job using the monitor and external job
+
+Like nightly backup etc etc
+
+
+
+How to deploy
+Where to deploy
+Where is my package
+
+1. Dev
+2. ST/QA
+3. Performance Testing
+4. Prod
+
+I cant create a job for each environment
+I need to give knowledge where is the prod where is the dev
+I need to give knowledge to the jenkins
+I need to choose where i want to deploy
+
+Parametrized
+
+
+ 
+

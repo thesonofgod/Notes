@@ -1,0 +1,844 @@
+
+How to install installation manager
+How to create response file
+How to install websphere from installation manager normally
+how to install websphere silently using the reponse fole
+
+How to create THread dumps
+
+How to create heap dumps
+
+How to see JVM logs
+
+how to see ihs logs
+
+How to enable GC
+
+How to set Heap size
+
+
+./ibmim ----> REcord and create the response file
+
+./imutilsc saveCredential -url 
+
+	 -secureStorageFile storage_file [ -masterPasswordFile master_password_file ]
+[ -preferences com.ibm.cic.common.core.preferences.ssl.nonsecureMode=true|false ]
+	[ -proxyHost proxy_host -proxyPort proxy_port
+		[ -proxyUsername proxy_username -proxyUserPassword proxyuser_password ]
+		[ -useSocks ] ]
+	[ -verbose ]
+	
+	su - WASADMIN
+	Useradd XXXXX
+	
+	Opt/Ibm/Im/eclipse
+	
+	/home/ec2-user/IBM/ResponseFile
+	
+	/opt/IBM/InstallationManager/eclipse/tools
+	
+	34.239.240.145
+	
+	 sudo ./imcl -acceptLicense input /home/ec2-user/IBM/ResponseFile/myResponseFile_WAS8.5.5.xml -log /home/ec2-user/IBM/ResponseFiles/Install8.5.5.xml
+	 
+	 \
+	 
+	 
+	 
+	 =======================	 =======================	 =======================	 =======================	 =======================	 =======================
+	34.201.2.97 newmorewas.pem
+	
+	
+	* Installation Managar location
+	 
+	 	/home/WasAdmin/opt/IBM/InstallationManager/eclipse
+		
+	* Tools location
+		/home/WasAdmin/opt/IBM/InstallationManager/eclipse/tools
+		
+		new =========	/opt/IBM/IM/eclipse/tools
+	* Response File 
+	
+	/opt/IBM/ResponseFiles
+		
+		
+		ResponseFileWas8.5.5.xml
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------		Chapter -- 1 
+************************************************************************************************************************************************************************		
+JMX java management Xtension ----> M bean interface
+
+For every compnent you have a 'mbean' to control and monitor my component 
+
+				Extensions controls the
+
+						Component 
+-------->						
+1.	$$$	Console (IS-ELITE) 
+							Talking with mbeans to control the components
+						
+						
+2.	$$$	Yu can also control the mbean using the commandline
+		
+		You need to have some kind of scripting in the command line to talk to the bean
+		./wsadmin script which actuallly will take 
+				-- jython
+				-- jackal(gone)
+				
+				
+3.	$$$	I can also directly talk to the mbean api using the java code to control and monitor the components.
+
+---------------------------------------------------------------------------------------------------------------------
+!!What is the difference between coding and scripting!!
+
+- Scripting will convert into beans and talk to the jmx
+
+- API you re writing the java code requiered to talk with the api 
+
+Bean - Which has a property with setters and getters 
+--------------------------------------------------------------------
+
+xml files - how to start websphere info
+
+--->the master repository willl have info about all the nodes
+
+Then it'll fedarate to other nodes its going to synchronize from master repository to your nodes.
+
+EJB container And Web Container --- Websphere
+
+ADmin service --- collection of admin m beans which are there in your application server
+
+
+Admin "service" -> it should be consumable (Provides an interface to talk to the mbeans) -> talk to mbeans via admin service
+ 
+Client EJB i can talk to EJB
+
+webservice using HTTP call i can talk to the web
+
+service --> consumable / interact 
+
+IIOP used to communication between client and server in EJB
+
+
+./wsadmin talks with 'admin service' using IIOP or webservice
+
+
+./wsadmin ---->   	IIOP						  		 ------>	admin service
+			-->		Webservices(SOAP) -----> Webservices ------>    admin service
+
+API  													------->    admin service 
+
+(9060 http port) SOAP protocol --- > it is built on top of the http protocol
+
+mbeans will write the data into the repository
+
+each and every jvm has admin service
+
+admin service is running on the jvm
+
+mbean is in the application server jvm
+
+Repository ---> Set of configuration files for your entire cell.
+
+				If you go into your machine 
+				
+											DMGR Profile ---> Profile name --> config ----> cells ----> cell01---> xml files resources.xml security.xml cell.xml 																																that is the master repository
+											
+											It collects all the configuration details to run your cell01 !! dmgr nodes jvm etc blah blah
+											
+											cell.xml 		---> contains data about the cell 
+										
+											resoucrces.xml 	---> they configured at the cell level
+											
+											security.xml    ---> it will have details about the secuirty details( USER ID PASSWROD(ENCRYTPED))
+											
+											you shoud not never touch the xml file directly
+											
+											you need to talk through the admin services
+									
+							We can edit the hosts
+							
+							serviceindex.xml contains all the information about the hosts
+							
+							all the info is in the xml files
+							
+							under the node you will se the node agent which is also a server
+							
+							under the node agent you'll see the server.xml node.xml
+							
+							
+							
+							Where is the application being deployed
+							
+							
+							
+							
+							When you deploy the application you're giving the jndi names etc you're altering the orginial deplyment unit
+							
+							
+				ivt.ear		The orginal deployment file is going to convert into 
+									
+										1. binary
+									+ 
+										2. config
+
+			Websphere/AppServer/profiles/Dmgr1/config/cells/Cells01/applications/ivt application.ear/deployments					
+											
+											
+											
+Installed Apps is a binary is not going to read any configuration details its only going to read class files.
+											
+											
+									All the configuration details are read from deployments.
+											
+								Modifications are stored in the config file in the deployments folder.
+								
+								
+								Binary 	(installed Apps)				+ 			Config(Deployments)
+								basic ear file											Changes made 
+								
+		Under the cell name there are clusters which has information about the clusters
+		
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+		Temp:
+		
+		/tmp    			Temp is 
+		
+		When you go to the console you modified the parameter 
+		
+		Before you save it its going to save it in the tmp 
+		
+		Once you save it it takes to the location it needs to go
+		
+		First tmp ----> main repository
+		
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+		
+	^^	There is a backup directory 
+		
+		During the changes it'll take automatic backups						
+																
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------										
+Application.xml
+
+contains info about the application context path and all the info about the information
+
+I gave you a brand new system
+
+Dmgr machine Ip address 
+
+How can you go to the console
+
+
+ps -ef| grep java 
+
+you can find the dmgr out of it go to the path serverindex.xml and login to the console
+
+or else find serverindex.xml and login to the console
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Without nodeagent you cannot start the jvm's 	
+2. Eventhough the dmgr is down the application will run. Only thing is you cannot deploy or manage and can still serve the client requests.
+3.				 To add a current node to another dmgr you will have to remove the node from the first dmgr.
+
+Dmgr with high availability is important
+
+IF DMGR IS DOWN YOU CAN START THE NODEAGENT.
+
+You can create a cluster only in a cell not across the cell
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Distributed process recovery
+
+_______---> node agent will communicate with the dmgr by using the cell discovery address
+
+_______---> dmgr will talk to the node agent using the node discovery address
+
+Managed process 
+
+_______---> jvms under the node will talk to the node by using the node multi cast discovery address(pg:20)
+				If i need to talk to one system to another i need to talk to the port if a jvm needs to talk to 10 jvms to the node agent needs 10 ports
+								So multi cast is used by the nodeagent to talk to the 10 jvms
+
+All this information can be found under the serverindex.xml file
+
+Node is a logical term | node agent is a process 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+There is an administrative agent and a job manager
+
+By default it is going to synchronize every sixty seconds.
+
+If you dont want to synchronize some of the files you can put that into a list(exclusions)
+ nodes --> node --> nodeagent --> file sync
+ 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Epoch and digest
+
+iF you modify the xml on the fly then the jvm doesnt know! because it is keeping old digest and epoch value because you did not modify via console or wsadmin
+
+so its gonna keep the old value
+
+Page 22 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+																			-------------------
+1. custom																	|	Server		  |
+2. standalone															/	|		Profile	  | == == myapplications + islite
+3. cell													ADMIN Agent||DMGR	|				  |
+4. dmgr																	\	|	Server		  |
+5. job manager											But more payment	|		Profile-2 | == == myapps + islite
+6. administratvie agent                                                     |                 |
+												 10k	Not cost effective  |    \   ""       |
+																			|				  |
+																			|	\  	""		  |
+																			-------------------
+														so Administrative agent comes to play to manger both the servers
+
+Admin agent can start stop and run python script but cannot do in console
+
+														
+			   //====== Cell1
+			  //
+			 //======= Cell2	
+			//											Job manager can connect to the admin agent	
+Job manager ||======== Cell3							Job manager can do limited operations like starting stoping etc.,
+			 \\
+			  \\====== ADmin agent
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+websphere supports java 1.6 and java 1.7
+
+Manage JDK managesdk.sh can change from 1.6 to 1.7 java
+
+synchronization is a one way process
+if i want to update a file in dmgr ---> refresh epoch
+sync node --- dmgr hostname and soap port
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------		Chapter -- 2
+************************************************************************************************************************************************************************		
+
+
+																																2 core machine
+Load Balancer  ----------			IHS		      				 	WAS					                                        4 core machine
+				\		              Plugin																				Weight based Load Balancing you can 
+				 \					               xxxxxxxxxxxxxxxxxxx											set weights for machine like 2 for 2 core 4 for 4 core
+				  \---------------  IHS           					WAS									
+				   				      Plugin																				its going to maintain the stickiness once 
+									  																			it'll get request.
+									  
+						******			what are the different sections we have in the plugin.xml		  
+									  1. maintain the IHS from was console
+									  2. plugin xml  ----> need to look into the plugin.xml file
+									  
+									  		i. Virtual Hosts
+											ii. Clusters
+													- Information about what type of algorithm you're using
+															- Weight based load balancing 
+																(Round Robin)
+															- Random Load Balancing	
+											iii. URI (Paths that it will allow)
+													- specify the context roots that you're going to accept
+											iv.  Route --> will have the combination of URI, CLuster and virtual Host.
+													
+													
+						When the plugin is executing it is going to start from the bottom, it'll check if it can server the request in that route
+						If cannot satisfy from all the routes
+						it'll serve from websphereee!! server if it cannot then it'll start from IHS server 
+						
+						Observer the plugin file
+						
+						How can make it work by using the WAS console how can I control my IHS's.
+						
+						Console
+						Creating the webserver from an unmanaged node
+						
+						webserver we gave
+											 adminctl start for the unmanaged node 
+											 user id and password for that webserver
+											 we altered te port number and server name in the admin.conf file to suit our webserver
+											 
+									/opt/IBM HTTP Server/bin>./htpasswd.sh /opt/IBM HTTP Server/conf/admin.passwd webadmin
+									give the password for the webadmin user
+									
+						managed node its easy to create the webservers and generate the config files
+						
+						ADD points on cloud and mq  
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+						
+						
+						
+						
+																	In the application J2EE
+																			- We have the application.xml file ---> generic j2ee spec 
+																			- Application_binding.xml
+									-----------------------------------------|-----------------------------------------------------------------------										
+									|																			|									|
+									|																			|									|
+									EJB (JAR File)															WAR File								RAR
+													- ejb.xml(JEE Spec)											     - web.xml							-RA.xml
+													- ejb-binding.xml											     - web-binding.xml
+											 
+											 
+											 Name Server is present in each and every JVM
+											 
+											 
+								If you want to control the order of execution
+								
+								I NEED TO START Z BEFORE X OR Y THEN YOU need to give weight. The one which has more weight will start first.
+								
+										Name service uses the Bootstrap port -------------------> Intial context lookup in EJB 	 
+										Name service performs a key to value binding
+										
+										./dumpnamespace.sh in my jvm 
+										how do i connect ============ bootstrap port
+
+
+
+										renameNode.sh ========= 
+										
+										when there is a 
+										failure in one node.
+										
+										I want to make at another location 
+										
+										I have the backup of the existing node
+										
+										I can use it and using renameNode.sh -asaexistingnode
+										 i can recover the information at the new node.
+										 
+										 
+										 JSP life cycle:
+										 
+										 (Servlet) --convert into a java program
+										 compiles and creates a class files
+										
+										
+          web bnd.xml -----keepgenerated tags -> then it'll keep the java files at the /AppServer/profiles/Prashanth1/temp/(App)/(App.war)
+		  
+		  
+											
+									 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+	EJB Client	--------------------------------------->						EJB Server
+ 						orb
+						bootstrap
+ initialContext x = new initialContext();
+ 
+ 
+ 																														!!SECURITY!!
+ 
+ 
+ Security is a component within websphere
+ 
+ 	   	Security component will run in Dmgr, node, nodeagent, etc.
+  
+  		To communicatie between dmgr and node it'll talk to the security component.
+		
+		secuirty.xml ---> cell level 
+							
+		----> You want to keep track of who logged in and what is changed.
+		----> enable the security you'll enable by using the service account.
+					
+					----> Request the LDAP a service account
+					   
+					   LDAP 								---> Heirarchial Database
+					   hostname and port number 								|
+					   														IT	|------------------------by i
+																				|                 |--   |
+																				|						|------	
+																			CS	|-----						|  |
+																				|    |						|  |
+																			EE	|
+							
+  
+  cn = prashanth O= us, ou = IT
+
+  RootDn
+  
+  Service account ---> given only to one person, can add authorative to one person, nobody uses that
+  hostname
+  portname
+  
+  base distinguished name ----> where do i need to start the search, su = engineering, ou = it, 
+  bind distinguished name ----> same as service account
+  
+  by using bind account you'll look into your account 
+  
+  Authentication
+  ----> Who you're
+  Authorization															Even though im authenticated im not able to authorized the account
+  ----> giving permission on the resources
+  
+  Roles																			Groups
+ -------																	   --------	
+ 				Acts on Resource											Collection of users
+ A role basically tells what are things that i can access.					
+ It act on top of the resource.
+ 
+ ---> In the Admin console i need to give some kind of authorization on a group or user.
+ 			
+			** There are predefined roles in websphere
+					- Administrator
+					- Secuirty Administrator
+					- Monitor				  ---> only for non prod we will give	 
+					- Deployer
+					- Configurator
+			
+			Once i enable the global secuirty fo rmy users i need to add a particular role.
+			
+					
+					
+ Creating your own security 
+ 
+ 	- If you have two clusters 1. ABC  ---> Admin Privileges
+								2. XYZ ---> general Privilegas
+								
+								
+								You can create custom roles and give permissions like this to the cluster level.
+								
+								
+								We need to stop the entire node or you need to turn of the security and completely disable and enable it and restart everything
+								
+								
+								In the secuirty.xml in that particular node enabled = true
+								
+								If we use the syncNode.sh to sync the node with the current security
+								
+			Test ---------------------------------------------------------+++
+			
+			Creating the security issue: 
+					
+					1. Stop a node 2.
+					2. Disable the security
+					3. Restart the Dmgr
+					4. stop the node 1. if you can't because of security then kill the process using the kill from command line.
+					5. Enable the dmgr global secuirty
+					6. Restart the dmgr 
+					7. solve the problem
+								
+								Either enable security ie make it true in the security.xml 
+								or
+								use syncNode.sh to sync the node with the security details along with the other details.
+								
+								
+								
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------Chapter 23
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+All the information is in the EAR file
+								
+ 
+ 		---->	If you're creating a datasource all the connection information is within the EAR file itself.
+		---->   That is the advantage of enhanced EAR
+		----> 	JDBC,JMS, Class Loader --> can be configured at the application level
+		---->	Will not be useful by JAS authentication alias(DB), virtual hosts, shared libraries ---> Server level
+		---->   if you take that enhanced ear and deploy it in other conatiners it will not work, it will only work in the websphere 
+		
+		
+		
+		Scopes: 
+		
+		When you create at cell level all the jvms under the cell will inherit that is it can use the data source or the other details
+		
+		If i create that at the cluster level all the servers under that will inherit
+		
+		If under that node, it'll take from the node level 
+		
+		
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------Chapter 24
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		
+ If your application is running and want to update the application.
+ 
+ (if you need to update a jsp or image.)
+ 
+ When you update the application ---> its going to stop your applciation ---------> start the application.
+ 
+ 
+ There is a roll out update ----> its basically 1. It's going to work one node at a time.
+ 												
+												
+						__-----> If you want to replace a particular module you can click on particular module and update it.
+ 
+ 
+ 
+ 
+ System Recovery
+-----------------
+
+We take daily backups backupConfig command---> Dmgr level.
+
+no stop mode 
+
+
+Usually the dmgr is stopped but if you use the no stop mode then it'll work
+
+			
+
+
+TroubleShooting
+---------------
+
+Why do you get error 404 and 500
+
+swg27038147
+
+http://www-01.ibm.com/support/docview.wss?uid=swg27038147
+
+swg27035752
+
+https://www-304.ibm.com/support/docview.wss?uid=swg27035752
+
+
+What are the symptopms::;
+
+
+--> file is not openinig etc etc
+
+Where is the problem occuring?????????????????
+
+IHS layer plugin or websphere server.
+
+
+IHS algorithms -----------------------------------------> RoundRobin and Random
+
+St3 problem the load balancer problem..?
+
+One of the developer, came and told that IHS is not doing the round robin, vertical cluster 4 jvm's in the same machine. requests are only going to the one jvm rest are idle..
+
+not able to access the files faster..
+
+when you send  arequest ot the first jvm.. 
+
+its going to maintian the counter for the plugin..
+
+by using the jsession id its routing the session data is retained..
+
+somebody went to the first jvm, 50 req gave so counter is 50..
+
+somebody suddenly started the load test..
+
+my counter of jvm 1 is 50 the rest are 0's
+
+all the 50 req went to the second jvm
+
+since it is a tcp session it has to maintian the sticky session
+
+the 50 req are going to the same jvm due to the session affinity
+
+until you stop the load test it  gonna go to the same jvm all the 50 req
+
+Yes there is an issue now..
+
+load balncer is our problem
+
+the application dosent require to maintain session affinity
+
+req --> response
+
+(to get the batch procession to get pound data....)
+
+Im gonna send the data and ask how much im gonna use..
+
+to solve this problem..
+
+remove the session affinity..
+ 			removed the clone id from the xml file
+			
+			enabled the logs in plugin... so knew that all the files were going to the same jvm
+			Each req is going to take it as independent now and now its gonna send across the four jvm's
+			
+			
+			Then resolved the problem. 
+			
+			we are tuning the application... we are adjusting the parameters..
+			
+			
+			--->	Same time everyday / peak load condition
+			
+			--->	1-5 pm is a peak load
+			
+			is this occurring ?
+			
+			have the problem occur after a configuration change?
+			
+			slowly the problem is progressing there is a problem with that
+			
+			can the problem be reproduced?
+			
+			are you able to collect the data and give it to us.
+			
+	-->		PMR Problem Management Resolution ---> IBM ticketing service. 
+			1. sev1 ---> call immediately
+			2. sev2 ---> in sometime
+			3. sev3 ---> low priority takes weeks.
+			
+	logs:
+	
+				System err 
+				System out
+				Native std err 
+				Native std out
+				
+				logs called first failure detection service..
+				FFDC
+				
+				where is FFDC 
+				
+				logs folder ---> FFDC 
+				it contains logs files.. 
+				any failure in the internal components of websphere it is going to write into the ffdc logs
+				
+				its also going to put a statement in the System.out logs
+				
+				
+		Diagnostic Trace:
+		
+				You're going to collect the data of a particular component in the trace field
+				
+				useful to get the trace lot more logs from the internal components of the websphere
+				
+				Ejb has some problem then they will ask you a trace and we can send the data to them
+				
+				
+				
+				Basic mode---> default format
+				
+				HPEL (High Performance Extensible logging) is gonna be in binary format( only for systemout and systemerr and tracelog)
+				
+				in order to view it there is log viewer tool by using that you can view the logs
+				
+				Less IO compared to the Basic mode.....
+				
+				Cross component tracing.....
+				
+						For example if i hava web module..
+						i deployed in one cluster
+						ihave a ejb module deployed it in another cluster
+						
+						
+						when i send a req from ejb to web module
+						
+						i want to track the transaction
+						
+						
+						i want to trace how web module is talking to ejb module
+						
+						by using the cross component trace you can do that
+						
+						
+				console ---> troblushooting --> Enable the log and trace correlation
+				
+				it gonna save in the trace.log
+				
+				
+			log loglevel=	"error"---> change it to debug Name = "path for http_plugin.log" ---> debug for the http_plugin.log
+			
+			it will generate trace which will ease to debug..
+			
+			**Hand Detection policy:
+			
+			I made a request to execute the query to database..
+			
+			the query took 5 min
+			its going to write in the log that hey one thread is hang and it is took more than 10 min...
+			Systemout.log its gonna write this
+			
+			you can take  athread dump and see what that thread is doing..
+			
+			
+			once the thread is completed, its going to write in systemout.log it will write that its completed
+			
+			hang detection policy... by default its going to write
+			
+			
+			can change the threshold
+			
+			
+			TOOLS:
+			-----
+			IBM support assistance(ISA)
+			Thread Dump	---> Thread analyser
+			Head Dump	---> Heap Anlyser
+			GC 			---> Pattern Moulding and analysis tool
+			
+				
+			native heap is exhausted -- will happen in 32 bit and not 64 bit
+			
+			object size is more than the heap size memory
+........................................................................................................................................................................
+........................................................................................................................................................................
+........................................................................................................................................................................
+........................................................................................................................................................................
+........................................................................................................................................................................
+	What servers are you using?			
+						
+			xerox --->	  IBM p850
+								64 core and 512 gb ram				new Hampshire concord
+			SMT	- Simultaneous Multi Threading						Atlanta, Georgia
+			
+			
+			
+								2 for middleware
+								2 for database
+								Each core has 8 hardware threads ---> SMT
+								
+						LPARu	Portal 	-2					Portal -2
+Logical Partitions - 4			Portal	-2					Portal -2			2 x 2 cluster In the physical machine
+4 jvms in each cluster								
+			4x4					In the WAS I have 4x4 16 JVM's
+CPU size								
+Mem Size						portel will perform call to the ejb to perform the crud operations
+								
+								ORACLE DB ---> WAS BUsinnes data
+								
+								One more database for the portal 
+								
+								
+			
+
+portal has 
+16 gb physical mem---RAM				IHS is a part of the portal ..
+											IHS is along with portal in the same machine.
+8 core LPAR 
+64 GB RAM
+
+
+AIX 7.1
+
+
+Topology:
+--------- 												EJB CALL| stateless session bean---> How did you make a call? IIOP Address
+
+Jsession ID --- HTTP request
+
+F5									ihs	+ portal(4 cores 16 Gb)            			WAS(LPAR)						
+ELB									IHS + portal(4 cores 16 Gb)			   			WAS(LPAR)
+									IHS + portal(4 cores 16 Gb)			   			WAS(LPAR)
+									IHS + portal(4 cores 16 Gb)		       			WAS(LPAR)
+
+initial context
+
+
+How do i know how much memory i have and how much memoryusing 
+
+how much cpu i have and how much im using im 
+
+
+				
+		
+				
+				
+					

@@ -1,0 +1,166 @@
+08/02/2017
+								Creating the linux instance in private subnet in WASVPC
+	
+	
+	WASVPC|						
+		  |	Public	Subnet							Private Subnet					
+		  |---------------------------------------------------------						
+		  |	Windows RDP 		 --------> 			Linux WAS 
+		  |		3389								Linux MQ
+		  |
+		  |192.168.1.0/24						192.168.2.0/24
+		  |
+		  
+		  
+		  Associated the Windows RDP to the route table
+		  
+		  WASVPC ----> 
+		  				CIDR Block ==== 192.168.0.0/16
+						
+						Attach InternetGateway
+						
+						
+		Ec2 instance 
+		
+		1. Windows RDP 		 ---> Windowssubnet | 2 cpus 4 gb | t2 medium | key --> newmorewas.pem 
+		2. LinuxWAS Instance ---> Rhl | 4cpus 8gb | t2 large | key --> newmorewas.pem | (From the Linux AMI) WASVPC | privatesubnet| SG : ssh | Only my system
+		
+		
+Windows RDP Connect: 
+Private IP	34.229.101.149
+User name	Administrator
+Password	eaiw;qR?nc%=3CBO@4eGA$;-DfO3rztq 
+
+
+Launched the RDP and Ssh from RDP to linux Instance
+
+
+
+
+creating a dmgr profile on linux
+
+ ./manageprofiles.sh -create -profileName Dmgr01 -profilePath /opt/IBM/WebSphere/AppServer/profiles/Dmgr01 -templatePath /opt/IBM/WebSphere/AppServer/profileTemplates/management -serverType DEPLOYMENT_MANAGER -cellName Cell01 -nodeName Dmgr01 
+
+Create a Server profile:/standalone
+
+/manageprofiles.sh -create -profileName MYPROFILE -profilePath /appprofiles/MYPROFILE -templatePath /apps/IBM/WebSphere/AppServer/profileTemplates/default -serverName TEST_SERVER  -nodeName MYPROFILENode1 -hostName mqnode.test.com -enableAdminSecurity true -adminUserName wasadmin -adminPassword wasadmin@12
+
+
+./addNode.sh localhost 8879 (SOAP) -username -password
+mAn
+
+192.168.1.165 new linux machine 
+
+./manageprofiles -delete -profileName XXXX
+
+Create a custom profile
+./manageprofiles.sh -create -profileName Custprofile -profilePath /opt/IBM/WebSphere/AppServer/profiles/Custprofile -templatePath /opt/IBM/WebSphere/AppServer/profileTemplates/managed  
+
+Administrative profile
+Job manager profile
+
+3 locations 
+64 machines prod 
+total 200 machines
+7000 deployments annual
+
+ODC		TDC			SDC
+
+3 cells 			
+16 machines
+Each machine - 64 cpu | 256 Gb Ram
+
+6 machines				6 machines
+
+		    4 machines
+
+
+Clusters:
+
+1.Horizontal 
+				Spread across different machines
+				2 or more physical machines.
+				
+			Advantage: 			Failover
+
+2.Vertical
+				Placing more than one jvm in a physical machine.
+				
+		
+		
+		Each and every JVM has its own port numbers
+		
+	|	-> wc-defaulthost				Access Application
+	|	-> wc-securedefaulthost			Access Application
+Http|
+	|	-> wc-adminhost					DMGR
+	|	-> wc-secureadminhost			DMGR
+
+		-> Soap                         Command line Administration
+		
+		Ripple Start - at a given point of time only one jvm is shutdown.
+		
+		Jvm log files will be created automatically
+		 
+		1. system out - output any logs
+		2. system err 
+		3. native std out  
+		4. native std err - gc log
+		
+		
+		Creating a cluster:
+		create cluster as default
+		
+		
+		
+		1. Generate a plugin
+			from the deployment manager bin
+			GenPluginCfg.sh
+			
+		2. You have to load the SO module to the IHS
+		
+		httpd.conf specify about the new plugin
+		genplugin is created by dmgr which route the requests between the jvm's
+		which gives info to the plugin which is inside a webserver
+		
+		Create one more IHS and add a load balancer to the two IHS and change the name of the html files to check if the load balancer is balancing
+		
+		deploy ivt.ear into the cluster
+		/opt/IBM/Websphere/AppServer/InstallableApps
+		
+		How to create a context path?
+		
+		
+Httpd error files	---->	Error logs and Acces logs
+		
+		
+
+
+Description	
+Default master key that protects my EBS volumes when no other key is defined
+Account	
+This account (342954439004)
+KMS Key ID	
+21186c5c-c759-4259-9c46-3a82e0530385
+KMS Key ARN	
+arn:aws:kms:us-east-1:342954439004:key/21186c5c-c759-4259-9c46-3a82e0530385
+
+https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_8.0.0/com.ibm.mq.ref.adm.doc/q083120_.htm
+alias queue
+remotequeue
+
+
+
+What is the purpose of profile?
+
+* Dmgr profile 
+It is used to manage different node
+* Application Server Profile: 
+Unmanaged, we can federate to mgr to make it managed. It has only one JVM and One node
+
+
+
+ 
+		
+		
+						

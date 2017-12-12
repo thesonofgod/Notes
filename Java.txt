@@ -1,0 +1,62 @@
+
+Java Project Point
+
+* Designed and implemented usage data record (UDR) by using the myna API to read the data on a TCP/IP connection from the network devices and used Websphere MQ, MDB's to consume the UDR records and processed.
+* Implemented pound data functionality by using Structs, EJB'S, XML and JPA.
+* Implemented the global router functionality(Custom ESB layer) to route the request and to throttle the request by using the Servlet's, xml and xslt functionality.
+* Implemented loader functionality by using MDB, JPA and hastlecast.(check spelling)
+* Developed the just in time rating support applications by using structs, and DAO's.
+* Implemented Recon application, by processing the files generated to sync the data generated between two systems(MainFrame and Just in time rating application).
+* Can resuse the coonections
+* implemented httppooling to make a call to the grid service,  by using the Apache Http client 4.x. This improved the performance, response time and CPU performance.
+
+
+
+
+
+
+We are responsible ae re responsible for on call
+
+devops skills we moved the non prod environments form the on perm data center to the cloud.
+i came from development background and solved several development issue
+
+coming to my topoloy im talking about production environement
+
+
+
+one chasis and each chasis has four blade servers
+you can add blades(Servers)
+We have 16 servers 
+4 chasis X 4 blades
+
+each core has 2 hardware threads..
+Each server has
+	64 core and 256 Gib ram
+we have three datacenters
+orb 
+these are the cisco blades
+
+Vm concept in linux
+
+these are solid physical servers
+
+3 datacenter
+orengeburg sacremento twinsburg
+
+our application is mainly for usage data.
+End user makes a call
+when you login to the myverizon site and type pound data or 
+if you type pound data on the cellphone we get request wil come to our servers and we will serve the usage data.
+
+We will have a GSS(Global Site Selector) which will send a request based om the proximity to the nearest load balancer.
+
+From there we will get the request to the IHS layers and through the plugin we will get a request to the Was layers and to the database layer and from the database we will serve the request to the user.
+
+at a given point of we get a maximum of .... users.
+
+
+the first page you'll see a portlet which is the data coming from our servers.
+
+we get the usage data records from a platform called rtr (real time rating) which is a network elemetns , from that we get the data to our mq queues, we process that and store the data into our databases 
+
+our system is mainly rating and billing system

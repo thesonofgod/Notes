@@ -1,0 +1,26 @@
+
+Inheritance:
+
+
+Multiple Inheritance is not supported in JAVA
+			Ambiguity Problem
+
+
+If there is a class A 
+and it has a method show()
+
+There is main class B and a B obj = new B(); object is present, then the obj.show() call the method from class A.
+
+This is known as Inheritance.
+
+If there are two classes Class A and Class B
+				Both have		show()
+
+		There is one more Class C
+
+		C is inheriting from both Class A and Class B
+
+		obj.show();
+		Now this shows a error because it will understand where to call the show() from? From Class A or Class B?
+
+
