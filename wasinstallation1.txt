@@ -27,9 +27,9 @@
 		
 		
 Windows RDP Connect: 
-Private IP	34.229.101.149
+Private IP	34.229.xxx.xxx
 User name	Administrator
-Password	eaiw;qR?nc%=3CBO@4eGA$;-DfO3rztq 
+Password	xxxxxxxxxxxxxxxxxx
 
 
 Launched the RDP and Ssh from RDP to linux Instance
@@ -58,23 +58,6 @@ Create a custom profile
 
 Administrative profile
 Job manager profile
-
-3 locations 
-64 machines prod 
-total 200 machines
-7000 deployments annual
-
-ODC		TDC			SDC
-
-3 cells 			
-16 machines
-Each machine - 64 cpu | 256 Gb Ram
-
-6 machines				6 machines
-
-		    4 machines
-
-
 Clusters:
 
 1.Horizontal 
@@ -111,8 +94,6 @@ Http|
 		Creating a cluster:
 		create cluster as default
 		
-		
-		
 		1. Generate a plugin
 			from the deployment manager bin
 			GenPluginCfg.sh
@@ -132,18 +113,7 @@ Http|
 		
 		
 Httpd error files	---->	Error logs and Acces logs
-		
-		
-
-
-Description	
-Default master key that protects my EBS volumes when no other key is defined
-Account	
-This account (342954439004)
-KMS Key ID	
-21186c5c-c759-4259-9c46-3a82e0530385
-KMS Key ARN	
-arn:aws:kms:us-east-1:342954439004:key/21186c5c-c759-4259-9c46-3a82e0530385
+	
 
 https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_8.0.0/com.ibm.mq.ref.adm.doc/q083120_.htm
 alias queue
