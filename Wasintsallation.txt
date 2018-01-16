@@ -785,7 +785,7 @@ remove the session affinity..
 ........................................................................................................................................................................
 	What servers are you using?			
 						
-			xerox --->	  IBM p850
+				  IBM p850
 								64 core and 512 gb ram				new Hampshire concord
 			SMT	- Simultaneous Multi Threading						Atlanta, Georgia
 			
